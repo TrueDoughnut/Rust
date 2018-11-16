@@ -1,4 +1,6 @@
 #![allow(non_snake_case)]
+#![allow(dead_code)]
+
 extern crate rand;
 
 use std::io;
