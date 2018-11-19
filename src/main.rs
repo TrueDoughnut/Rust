@@ -4,13 +4,15 @@
 
 mod guessing_game;
 mod fibonacci;
+mod dice_roller;
 
 fn main() {
     //guessing_game::run();
     //expression();
     //if_statements();
     //loops();
-    fibonacci::run();
+    //fibonacci::run();
+    dice_roller::run();
 }
 
 
