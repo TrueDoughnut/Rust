@@ -32,7 +32,7 @@ pub fn run(){
         };
 
         let mut sum: i32 = 0;
-        for i in (1..a).rev() {
+        for i in (0..a).rev() {
             sum += rand::thread_rng().gen_range(1, b);
         }
         stack.push(sum);

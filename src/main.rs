@@ -5,14 +5,25 @@
 mod guessing_game;
 mod fibonacci;
 mod dice_roller;
+mod structs;
+mod enums;
 
 fn main() {
     //guessing_game::run();
+
     //expression();
+
     //if_statements();
+
     //loops();
+
     //fibonacci::run();
-    dice_roller::run();
+
+    //dice_roller::run();
+
+    structs::run();
+    structs::tuple_struct::run();
+    structs::area::run();
 }
 
 
