@@ -7,7 +7,7 @@ mod fibonacci;
 mod dice_roller;
 mod structs;
 mod enums;
-mod tic_tac_toe;
+mod collections;
 
 fn main() {
     //guessing_game::run();
@@ -26,7 +26,9 @@ fn main() {
     //structs::tuple_struct::run();
     //structs::area::run();
 
-    enums::run();
+    //enums::run();
+
+    collections::run();
 }
 
 
