@@ -2,9 +2,11 @@
 #![allow(unused_variables)]
 
 pub mod Coins;
-use self::Coins::value_in_cents;
-use self::Coins::Coin;
-use self::Coins::State;
+use self::Coins::{
+    value_in_cents,
+    Coin::Quarter,
+    State::{Illinois, California}
+};
 
 enum IpAddr {
     V4(u8, u8, u8, u8),
@@ -16,5 +18,5 @@ pub fn run(){
 
     let loopback = IpAddr::V6(String::from("::1"));
 
-    println!("{}", value_in_cents(Coin::Quarter(State::Illinois)));
+    println!("{}", value_in_cents(Quarter(Illinois)));
 }
