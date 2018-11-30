@@ -1,16 +1,23 @@
 use std::collections::HashMap;
 use std::f32;
+use std::fmt;
 
 mod vector;
 mod hash_map;
+mod company;
 
 pub fn run(){
-    vector::run();
+    //vector::run();
 
-    hash_map::run();
+    //hash_map::run();
 
-    let vec = [30, 30, 3892, 3893, 50, 38, 2, 43, 689, 390].to_vec();
-    stats(vec);
+    //let vec = [30, 30, 3892, 3893, 50, 38, 2, 43, 689, 390].to_vec();
+    //stats(vec);
+
+    //println!("{}", pig_latin(String::from("that")));
+    //println!("{}", pig_latin(String::from("apple")));
+
+    company::run();
 }
 
 fn stats(arr: Vec<i32>){
@@ -29,45 +36,34 @@ fn average(arr: &Vec<i32>) -> f32 {
 }
 
 fn mode(arr: &Vec<i32>) -> i32 {
-    assert!(arr.len() > 0);
-
     let mut map = HashMap::new();
     for i in arr {
         let count = map.entry(i).or_insert(0);
         *count += 1;
     }
 
-    println!("{:?}", map);
+    let max_value = map.values().cloned().max().unwrap_or(0);
 
-    let num = match arr.get(0) {
-        Some(num) => num,
-        None => {
-            println!("panic");
-            panic!();
-        }
-    };
-
-    let max = match map.get(num){
-        Some(num) => *num,
-        None => {
-            println!("panic");
-            panic!();
-        }
-    };
-
-    let mut max_key: i32 = -1;
     for (key, value) in map {
-        if value > max {
-            max_key = *key;
+        if value == max_value {
+            return *key;
         }
     }
-    return max_key;
+    panic!("None");
 }
 
-#[derive(Debug)]
 enum Result {
     Decimal(f32),
     Integer(i32),
+}
+
+impl fmt::Debug for Result {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            Result::Decimal(num) => write!(f, "{}", num),
+            Result::Integer(num) => write!(f, "{}", num),
+        }
+    }
 }
 
 fn median(arr: &Vec<i32>) -> Result {
@@ -84,4 +80,23 @@ fn median(arr: &Vec<i32>) -> Result {
         let mid = vec.len() / 2;
         return Result::Integer(vec[mid]);
     }
+}
+
+fn pig_latin(word: String) -> String {
+    let mut base: String = word.clone();
+
+    let first: char = word.chars().next().unwrap();
+    let val:String = match first {
+        'a' | 'e' | 'i' | 'o' | 'u' => {
+            base.push_str(" hay");
+            base
+        },
+        _ => {
+            let end = &base[1..];
+            let str: String = format!("{} {}ay", end, first);
+            str
+        }
+    };
+
+    return val;
 }
