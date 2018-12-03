@@ -1,18 +1,37 @@
 use std::io;
+use std::collections::HashMap;
 
 pub fn run(){
-    println!("Enter the command");
+
+    let mut map: HashMap<&str, Vec<&str>> = HashMap::new();
+
     let mut entered = String::new();
 
-    io::stdin().read_line(&mut entered)
-        .expect("failed read line");
+    while entered != "exit" {
+        println!("Enter the command");
 
-    let vec: Vec<&str> = entered.split(" ").collect();
+        io::stdin().read_line(&mut entered)
+            .expect("Failure"); ;
 
-    let last = match vec.last() {
-       Some(num) => num,
-        None(_) => "fail"
-    };
+        let vec: Vec<&str> = entered.split(" ").collect();
 
-    println!("{}", last);
+        let last = match vec.last() {
+            Some(word) => word,
+            None => panic!(),
+        };
+
+        if vec[0] == "add" {
+            let name = vec[1];
+            if map.contains_key(last) {
+                let inner = match map.get_mut(last) {
+                    Some(vec) => vec,
+                    None => panic!(),
+                };
+                inner.push(name);
+            } else {
+                map.insert(last, vec!(vec[1]));
+            }
+        } else if vec[0] == "remove" {}
+    }
+    println!("{:?}", map);
 }
